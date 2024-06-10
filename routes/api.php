@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,5 @@ use App\Http\Controllers\RegisterController;
 Route::apiResource('users', UserController::class);
 Route::apiResource('admins', AdminController::class);
 Route::apiResource('activities', ActivityController::class);
-Route::post('/register', RegisterController::class)->name('register');
-Route::post('/login', App\Http\Controllers\LoginController::class)->name('login');
-Route::middleware('auth:api')->get('/admin', function (Request $request) {
-    return $request->admin();
-});
+Route::get('/total-users', [DashboardController::class, 'getTotalUsers']);
+Route::get('/total-activities', [DashboardController::class, 'getTotalActivities']);
